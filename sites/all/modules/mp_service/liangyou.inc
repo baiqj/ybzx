@@ -5,6 +5,8 @@ function liangyou_audio_list(){
   $radios_list = array(
     // 福音节目-适合所有人士
     // '31' => array(//15200
+
+      'zb' => array('url'=>'http://stream.liangyou.net/channel/65837e3587', 'name' =>'良友直播'),
       'ir' => array('url'=>'http://stream.liangyou.net/program/1njchu-3b2ozo', 'name' =>'i-radio爱广播', 'prefix'=>$prefix['31'],'day'=>0),//0
       'eg' => array('url'=>'http://stream.liangyou.net/program/1njcjg-3b2p2w', 'name' =>'英语世界', 'prefix'=>$prefix['31'],'day'=>2),//2
       'gt' => array('url'=>'http://stream.liangyou.net/program/1njcj0-3b2p20', 'name' =>'恩典与真理', 'prefix'=>$prefix['31'],'day'=>0),//0
@@ -77,7 +79,49 @@ function liangyou_audio_list(){
 
 function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
 {
-	
+	     if($keyword == 'zb') {
+        $url = $radios_list[$keyword]['url'];
+        $html = file_get_html($url);
+        $pattern = '/data-mp3="http:\/\/www.cloud-audio.com\/get_stream\/\w+-\w+/';
+        preg_match_all ($pattern, $html, $matches);
+        // $Title = trim($html->find('#div_playlist li div [tabindex=1]', 0)->plaintext);
+        $audio_url = str_replace('data-mp3="', '', $matches[0][0]);
+        $live_radio = get_headers($audio_url,true);
+        $true_url = $live_radio['location'];
+
+        foreach($html->find('[class="li_show"]') as $e) {
+          $get_title = explode('&nbsp;&nbsp;&nbsp;', $e->plaintext);
+          $titles[] = $get_title;
+          $mp3s[] = $e->attr['data-mp3'];
+          $time[] = array(
+            $e->attr['data-start_time'],
+            $e->attr['data-end_time']
+          );
+
+          $now = time();
+          if($now>= $e->attr['data-start_time'] && $now<= $e->attr['data-end_time'] ){
+            // dpm($e->plaintext);
+            // dpm($e->attr['data-mp3']);
+            $audio_url = $e->attr['data-mp3'];
+            $live_radio = get_headers($audio_url,true);
+            $true_url = $live_radio['location'];
+            dpm($true_url);
+
+            $title = $get_title[1];//'英语世界';
+            $week_day = date('N', time());
+            $title = "【zb】".$title;
+            // $musicurl = // http://liangyou2.nissigz.com:15200/gv/gv131218.mp3
+            $musicurl = $true_url;
+            $desc = "公众号:永不止息".date('H:i',$e->attr['data-start_time']).'-'.date('H:i',$e->attr['data-end_time']);
+            $hgmusicurl = $musicurl;
+            $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+            return;
+            break;
+          }
+        }
+
+       }
+
       // bv-1;
       // || in_array(substr($keyword, 0,2), array_keys($radios_list)) 
       if(in_array($keyword, array_keys($radios_list))) {
