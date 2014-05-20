@@ -6,7 +6,7 @@ function liangyou_audio_list(){
     // 福音节目-适合所有人士
     // '31' => array(//15200
 
-      'zb' => array('url'=>'http://stream.liangyou.net/channel/65837e3587', 'name' =>'良友直播'),
+      '520' => array('url'=>'http://stream.liangyou.net/channel/65837e3587', 'name' =>'良友直播'),
       'ir' => array('url'=>'http://stream.liangyou.net/program/1njchu-3b2ozo', 'name' =>'i-radio爱广播', 'prefix'=>$prefix['31'],'day'=>0),//0
       'eg' => array('url'=>'http://stream.liangyou.net/program/1njcjg-3b2p2w', 'name' =>'英语世界', 'prefix'=>$prefix['31'],'day'=>2),//2
       'gt' => array('url'=>'http://stream.liangyou.net/program/1njcj0-3b2p20', 'name' =>'恩典与真理', 'prefix'=>$prefix['31'],'day'=>0),//0
