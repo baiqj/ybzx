@@ -519,8 +519,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
-        case '520':
-        case '５２０':
+        case '5200':
         // http://media.haomuren.org/dev/joy/joyhrt0716.mp3
           $title = '喜乐的心';
           $title = "$title-".date('n月j日');

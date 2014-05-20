@@ -79,7 +79,7 @@ function liangyou_audio_list(){
 
 function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
 {
-	     if($keyword == 'zb') {
+	     if($keyword == '520') {
         $url = $radios_list[$keyword]['url'];
         $html = file_get_html($url);
         $pattern = '/data-mp3="http:\/\/www.cloud-audio.com\/get_stream\/\w+-\w+/';
@@ -109,7 +109,7 @@ function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
 
             $title = $get_title[1];//'英语世界';
             $week_day = date('N', time());
-            $title = "【zb】".$title;
+            $title = "【520】".$title;
             // $musicurl = // http://liangyou2.nissigz.com:15200/gv/gv131218.mp3
             $musicurl = $true_url;
             $desc = "公众号:永不止息".date('H:i',$e->attr['data-start_time']).'-'.date('H:i',$e->attr['data-end_time']);
