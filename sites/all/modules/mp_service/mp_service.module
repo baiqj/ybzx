@@ -158,6 +158,9 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
     case Wechat::MSGTYPE_TEXT:
       $keyword =  trim($wechatObj->getRevContent());
       $keyword = strtolower($keyword);
+      $keyword = make_semiangle($keyword);
+      $keyword = str_replace('[', '', $keyword);
+      $keyword = str_replace(']', '', $keyword);
       $FromUserName = $wechatObj->getRev()->getRevFrom();
 
       if(!mp_service_get_record($FromUserName)) {
@@ -182,7 +185,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           exit;
       }
-       if($keyword == 'mama') {
+      if($keyword == 'mama') {
           $musicurl ='http://fm77.u.qiniudn.com/xiaomin/mama20140503.mp3';
           $desc = "公众号:永不止息";
           $hgmusicurl = $musicurl;
