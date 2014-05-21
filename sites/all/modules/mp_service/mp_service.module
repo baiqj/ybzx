@@ -182,12 +182,6 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           exit;
       }
-
-      // if($keyword == 'bv') {
-      //   $contentStr = "灵命日粮最近不能播放，小永请您耐心等候代祷\n请先<a href='http://stream.liangyou.net/program/1njcht-3b2ozm'>点击这里收听</a>\nIphone用户点击：http://stream.liangyou.net/program/1njcht-3b2ozm";
-      //     $wechatObj->text($contentStr)->reply();
-      //     exit;
-      // }
        if($keyword == 'mama') {
           $musicurl ='http://fm77.u.qiniudn.com/xiaomin/mama20140503.mp3';
           $desc = "公众号:永不止息";
@@ -394,13 +388,6 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
         case 'n':
           $contentStr =  "谢谢反馈！";
           break;
-          // $img = array(
-          //     'Title'=> '第一天 爱是恒久忍耐',
-          //     'Description'=>'',
-          //     'PicUrl'=>'http://love.yongbuzhixi.org/sites/default/files/love40/s4568837.jpg',
-          //     'Url'=>'http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5MzQ3OTA2MA%3D%3D&appmsgid=10000311&itemidx=1&sign=68ba37452de8968121010831e3f45d43&scene=1#wechat_redirect'
-          //   );
-          // $news[] = $img;
         case '365':
           $title = "恩典365:".date("m月d日");
           $musicurl = 'http://w2.ysong.org/yage/60%E7%A6%8F%E9%9F%B3%E8%AF%81%E9%81%93/%E5%AF%87%E7%BB%8D%E6%81%A9/2014%E5%B9%B4%20'.urlencode(month2china()).'%E6%9C%88%E4%BB%BD/'.date('Ymd').'.mp3';;

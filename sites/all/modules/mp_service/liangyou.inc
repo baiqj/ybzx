@@ -115,7 +115,7 @@ function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
             $desc = "公众号:永不止息".date('H:i',$e->attr['data-start_time']).'-'.date('H:i',$e->attr['data-end_time']);
             $hgmusicurl = $musicurl;
             $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-            return;
+            exit;
             break;
           }
         }
@@ -150,6 +150,6 @@ function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
         $desc = "公众号:永不止息 ".date("n月d日-周").$week_day;
         $hgmusicurl = $musicurl;
         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
-        return;
+        exit;
       }
 }
