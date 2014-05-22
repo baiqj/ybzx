@@ -881,7 +881,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
             }else {
               $wechatObj->setFuncFlag(TRUE);
               $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
-              wx_comment('453',$keyword,$wechat_user_info);
+              wx_comment('1156',$keyword,$wechat_user_info);
               $contentStr = "您发的指令，暂无内容，反馈已发给小永!\n如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n回复【0】进入主菜单\n回复【32】进入良友广播\n回复【11+问题】获得帮助\n回复【110】推荐给好友？\n".$notice;
             }
           break;
