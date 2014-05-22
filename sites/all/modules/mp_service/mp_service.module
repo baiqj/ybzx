@@ -162,6 +162,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
       $keyword = str_replace('[', '', $keyword);
       $keyword = str_replace(']', '', $keyword);
       $keyword = str_replace("'", '', $keyword);
+      $keyword = str_replace('"', '', $keyword);
       $FromUserName = $wechatObj->getRev()->getRevFrom();
 
       if(!mp_service_get_record($FromUserName)) {
