@@ -1,5 +1,6 @@
 <?php
-print_r(get_heads('http://baidu.com',1));
+error_reporting(E_ALL);
+print_r(get_headers('http://baidu.com',1));
 echo "Welcome to Baidu Cloud";
 ?>
 
