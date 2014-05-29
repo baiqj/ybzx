@@ -214,11 +214,11 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
         $audio =  drupal_json_decode($html);
         $musicurl = "http://fdfs.xmcdn.com/".$audio['play_path_32'];
         $hgmusicurl = "http://fdfs.xmcdn.com/".$audio['play_path_64'];
-        $date = date("n月d日",time()-$offday*86400);
+        $date = "同步更新，日期可能会超强或~";//date("n月d日",time()-$offday*86400);
         $desc = "公众号:永不止息 ".$date;
         //group5/M02/17/57/wKgDtVN8YA6yootYAAV5Hte41ho003.mp3
-        $wechatObj->music('【xl】'.$audio['album_title'], $desc, $musicurl, $hgmusicurl)->reply();
-          // exit;
+        $wechatObj->music('【xl】'.str_replace('.wav', '', $audio['title']), $desc, $musicurl, $hgmusicurl)->reply();
+          exit;
 
       }
       $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
@@ -381,8 +381,14 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           break;
         case '77':
           $title = 'FM 77.7-永不止息';
-          $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';
-          $desc = "我的爱不改变";
+          $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';//我的爱不改变
+          $musicurl = 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E5%A4%A7%E5%9C%B0.mp3';
+          // $musicurls = array('http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E7%A5%B7%E5%91%8A.mp3',
+          // 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E5%A4%A7%E5%9C%B0.mp3',
+          // 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E8%80%B6%E7%A8%A3%E6%97%B6%E4%BB%A3.mp3');
+          // $desc[] = "祷告";
+          $desc = "这条路上我们一起走";
+          // $desc[] = "耶稣时代";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
           break;
