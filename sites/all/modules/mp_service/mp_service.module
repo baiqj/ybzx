@@ -442,7 +442,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
               'Title'=> '▼永不止息-部分广播目录(v01版)▼',
               'Description'=>'你良友的啥关系？',
               'PicUrl'=>'http://www.yongbuzhixi.com/sites/all/themes/love/family_1.png',
-              'Url'=>'http://wx.dev.camplus.hk/about'
+              'Url'=>'http://www.yongbuzhixi.com/about'
             );
           $news[] = $img;
           
@@ -463,13 +463,13 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $img = array(
               'Title'=> "▶微信问答板块(暂时开放)\n ●广播指令为纯数字，请勿带【】号",
               'PicUrl'=>'',
-              'Url'=>'http://wx.dev.camplus.hk/questions'
+              'Url'=>'http://www.yongbuzhixi.com/questions'
             );
             $news[] = $img; 
           $img = array(
               'Title'=> "▶微信灵修网站(暂缓开放)\n ●注意流量30M流量可以听30天【523】",
               'PicUrl'=>'',
-              'Url'=>'http://wx.dev.camplus.hk'
+              'Url'=>'http://www.yongbuzhixi.com'
             );
             $news[] = $img;
           // $img = array(
@@ -1048,7 +1048,7 @@ function mp_service_get_user_info($wechatObj,$account='1',$password='2',$mp_uid=
   $options = array(
     'account'=>$account,
     'password'=>$password,
-    'datapath'=>'/home/wwwroot/wx.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_',
+    'datapath'=>'/var/www/ybzx/sites/all/modules/mp_service/data/cookie_',
       'debug'=>FALSE,
       'logcallback'=>'logdebug' 
   );
@@ -1078,7 +1078,7 @@ function mp_service_update_user_info($wechatObj,$account='1',$password='2',$mp_u
   $options = array(
     'account'=>$account,
     'password'=>$password,
-    'datapath'=>'/home/wwwroot/wx.dev.camplus.hk/public_html/sites/all/modules/mp_service/data/cookie_',
+    'datapath'=>'/var/www/ybzx/sites/all/modules/mp_service/data/cookie_',
       'debug'=>FALSE,
       'logcallback'=>'logdebug' 
   );
