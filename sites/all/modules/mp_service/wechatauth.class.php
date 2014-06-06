@@ -22,7 +22,7 @@ class Wechatauth
 	private $_cookiename;
 	private $_cookieexpired = 3600;
 	private $_account = 'test';
-	private $_datapath = './data/cookie_';
+	private $_datapath;
 	private $debug;
 	private $_logcallback;
 	public $login_user; //当前登陆用户, 调用get_login_info后获取
