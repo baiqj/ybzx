@@ -3,7 +3,6 @@ function mp_service_settings_form($form, &$form_state) {
 	global $user;
 	// variable_del('mp_service_'.$user->uid);
 	$default_value = variable_get('mp_service_'.$user->uid,NULL);
-	dpm(variable_get('mp_service_172',NULL));
 	if ($default_value) {
 		$default_value = explode('/', $default_value);
 		unset($default_value[2]);

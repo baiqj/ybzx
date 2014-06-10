@@ -19,7 +19,8 @@ function mp_service_menu() {
     'title' => 'mp_service settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mp_service_settings_form'),
-    'access arguments' => array('administer site configuration'),
+    'access callback' => 'user_is_logged_in',
+    // 'access arguments' => array('administer site configuration'),
     'file' => 'mp_service.admin.inc',
   );
   $items['mp_services/%/%'] = array(
@@ -383,13 +384,13 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $title = 'FM 77.7-永不止息';
           $musicurl = 'http://fm77.u.qiniudn.com/77/wodeaiybb.mp3';//我的爱不改变
           $musicurl = 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E5%A4%A7%E5%9C%B0.mp3';
-          $musicurl = 'http://fm77.u.qiniudn.com/140531/love2in1/5%20%E6%9C%88%2031%20%E6%97%A5%2014%E7%82%B903%E5%88%86(2).mp3';//0531袁大同-love2in1
+          // $musicurl = 'http://fm77.u.qiniudn.com/140531/love2in1/5%20%E6%9C%88%2031%20%E6%97%A5%2014%E7%82%B903%E5%88%86(2).mp3';//0531袁大同-love2in1
           // $musicurls = array('http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E7%A5%B7%E5%91%8A.mp3',
           // 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E5%A4%A7%E5%9C%B0.mp3',
           // 'http://fm77.u.qiniudn.com/140511/xiaomin/cut/5%E6%9C%8811%E6%97%A59%E7%82%B919%E5%88%86%E9%93%83%E5%A3%B0%E8%80%B6%E7%A8%A3%E6%97%B6%E4%BB%A3.mp3');
           // $desc[] = "祷告";
           $desc = "这条路上我们一起走";
-          $desc = "袁大同-主爱合一盟约课1405311";
+          // $desc = "袁大同-主爱合一盟约课1405311";
           // $desc[] = "耶稣时代";
           $hgmusicurl = $musicurl;
           $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
@@ -937,7 +938,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
 // watchdog('FromUserName_res1', $res, array(), WATCHDOG_NOTICE, 'link');
         if($Event['event'] == 'subscribe') {
           if(mp_service_get_record($FromUserName)) {
-            $contentStr = "小永[Smile]欢迎您回来[Smile]\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n免费获取主内精彩图文?\n点此关注婚恋帐号\n-----需要有你-----</a>\n回复【31】收听广播\n不要输入【】括号\n部分功能测试开发中～\n敬请期待！\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方服务帐号\n-----需要有你-----</a>\n回复【0】了解更多";
+            $contentStr = "小永[Smile]欢迎您回来[Smile]\n<a href='weixin://contacts/profile/love_yongbuzhixi'>-----永不止息-----\n免费获取主内精彩图文?\n点此关注婚恋帐号\n-----需要有你-----</a>\n回复【31】收听`广播\n不要输入【】括号\n部分功能测试开发中～\n敬请期待！\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方服务帐号\n-----需要有你-----</a>\n回复【0】了解更多";
             mp_service_resubscribe($FromUserName);
           }else {
             $contentStr = "[Smile]欢迎关注[Smile]\n<a href='weixin://contacts/profile/love_yongbuzhixi'>免费获取主内精彩图文?\n点此关注主帐号</a>\n回复【31】收听广播\n不要输入【】括号\n部分功能测试开发中～\n敬请期待！\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方帐号\n-----需要有你-----</a>\n回复【0】了解更多";

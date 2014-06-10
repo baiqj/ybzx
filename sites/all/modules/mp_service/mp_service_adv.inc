@@ -286,6 +286,7 @@ class Wechat {
 	 */
 	public function getRevEvent(){
 		if (isset($this->_receive['Event'])){
+			watchdog('getRevEvent', '<pre>'.print_r($this->_receive,true), array(), WATCHDOG_NOTICE, 'link');
 			return array(
 					'event'=>$this->_receive['Event'],
 					'key'=>$this->_receive['EventKey'],
