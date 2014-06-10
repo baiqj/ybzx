@@ -84,7 +84,13 @@
     ?>
     <div class="submitted">
 	    <?php //print $permalink; ?>
-	    <?php print $submitted; ?>
+	    <?php //print $submitted; ?>
+        <span class="username">
+          <?php echo $comment->name; ?>
+        </span>
+        <span class="created">
+          <?php echo date('m/d H:i',$comment->created);?>
+        </span>
 	  </div>
     <?php if ($signature): ?>
     <div class="user-signature clearfix">
@@ -94,6 +100,5 @@
   </div>
 
 </div>
-
   <?php print render($content['links']) ?>
 </div>

@@ -74,6 +74,7 @@
  */
 $account = user_load(arg(1));
 global $user;
+// dpm($user);
 ?>
 <?php if($logged_in):?>
 
