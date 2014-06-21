@@ -12,6 +12,13 @@ function ybzx_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     // 'pages' => 'node/371',
   );
+  $blocks['love_group_index'] = array(
+    'info' => t('love_group_index'),
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'node/2',
+  );
   $blocks['video_endian_comments'] = array(
     'info' => t('video_endian_comments'),
     'cache' => DRUPAL_NO_CACHE, //to be confirmed
@@ -26,9 +33,26 @@ function ybzx_block_info() {
  * Implements hook_block_view().
  */
 function ybzx_block_view($delta = '') {
-	 module_load_include('inc', 'love_layout', 'love_layout.block');
+	module_load_include('inc', 'love_layout', 'love_layout.block');
   $block = array();
   switch ($delta) {
+    case 'love_group_index':
+      $block['subject'] = NULL;
+      $block['content'] = '<div class="intro-left pull-left">
+  <h2>幸福家庭</h2>
+  <h3>从婚恋迈出第一步</h3>
+  <h3>响应呼召，组建家庭 让爱永不止息！</h3>
+  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-user"></span> 注册申请
+  </button>
+  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-edit"></span> 完善资料
+  </button>
+  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-ok"></span> 审核通过
+  </button>
+</div>';
+      break;
   	case 'video_endian':
   		$html = file_get_html('http://v.tudou.com/_114352882/');
 			  //get title $('[code]').attr('code')

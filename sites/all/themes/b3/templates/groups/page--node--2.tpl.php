@@ -72,76 +72,8 @@
  *
  * @ingroup themeable
  */
-$account = user_load(arg(1));
-global $user;
-// dpm($user);
-$url = 'http://weixin.sogou.com/gzhjs?cb=sogou.weixin.gzhcb&openid=oIWsFt1gF4leXGYvUZd37TlFG4Ac';
-// $context = stream_context_create(array('http' => array('header' => 'User-Agent: Mozilla compatible')));
-$html = file_get_html($url);
-$html = trim($html->plaintext);
-$html = str_replace('sogou.weixin.gzhcb(', '', $html);
-$html = str_replace(')', '', $html);
-// 解决xml_parse(): input conversion failed due to input error
-// 错误原因：xml中存在无法转换的字符；
-// 解决：
-// 步骤1、通过mb_detect_encoding函数，获取xml的编码；
-// 步骤2、通过mb_convert_encoding函数转成指定的编码，或使用iconv，但编码参数需加上//IGNORE；
-// 步骤3：通过正则将<?xml …. encoding=”gb2312″ ..? >中的gb2312替换为指定编码；
-$html = str_replace('gbk', 'UTF-8', $html);
-
-preg_match_all("/{(.*)}/s",$html,$match);
-$html = json_decode($match[0][0]);
-// $xmlstring = $html->items[0];
-// dpm(mb_detect_encoding($xmlstring));
-// $xmlstring = mb_convert_encoding($xmlstring, "UTF-8");
-// $xml = simplexml_load_string($xmlstring);
-// $json = json_encode($xml);
-// $array = json_decode($json,TRUE);
-dpm($html);
-
 ?>
-<?php if($user->uid ==6 &&$logged_in):?>
-
-<div class="bbb-page-user clearfix">
-  <div class="header">
-    <div class="bbb-goback"><?php echo l('« 首页','')?></div>
-    <div class="username">@<?php echo $account->name?$account->name:'匿名^_^';?></div>
-  </div>
-  
-  <div class="bbb-user">
-    <div class="picture">
-      <a href="#" class="">
-        <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="https://avatars2.githubusercontent.com/u/1160703?s=460" style="width: 140px; height: 140px;">
-      </a>
-    </div>
-    <div class="username"> <h3><span>郭向科</span> <span>男</span> <span>27岁</span> <span>交往中...</span></h3></div>
-    <div class="usersignatures">
-      <p>天空依然蔚蓝，虽然有时你看不见  这家伙很懒， 这家伙很懒， 这家伙很懒， 这家伙很懒</p>
-    </div>
-    <div class="ops"><a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus"></span>关 注</a> </div>
-    <div class="status clearfix">
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表可信度">
-        <span class="item"><div class="count">3</div><div class="s-name">熟人</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表努力度">
-        <span class="item"><div class="count">32</div><div class="s-name">关注</div></span>
-      </a>
-      <a href="#" class="tooltip-count active" data-toggle="tooltip" data-placement="bottom" title="代表真诚度">
-        <span class="item"><div class="count">12</div><div class="s-name">照片</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表活跃度">
-        <span class="item"><div class="count">52</div><div class="s-name">心语</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表受欢迎度">
-        <span class="item"><div class="count">33</div><div class="s-name">粉丝</div></span>
-      </a>
-      
-    </div>
-    <div class="demo" style="height:300px;"></div>
-  </div>
-</div>
-<?php endif;?>
-<div id="head_wrapper" style="display:none;">
+<div id="head_wrapper">
   <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
     <div class="container-nav">
       <div class="navbar-header">
@@ -190,7 +122,7 @@ dpm($html);
         <p class="lead"><?php print $site_slogan; ?></p>
       <?php endif; ?>
 
-      <?php //print render($page['header']); ?>
+      <?php print render($page['header']); ?>
     </header> <!-- /#page-header -->
 
     <div class="row main-row">
@@ -205,14 +137,17 @@ dpm($html);
         <?php if (!empty($page['highlighted'])): ?>
           <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
         <?php endif; ?>
-        <?php if (0&&!empty($breadcrumb)): print $breadcrumb; endif;?>
+        <?php if (0&& !empty($breadcrumb)): print $breadcrumb; endif;?>
         <a id="main-content"></a>
         <?php print render($title_prefix); ?>
-        <?php if (!empty($title)): ?>
+        <?php if (0&& !empty($title)): ?>
           <h1 class="page-header"><?php print $title; ?></h1>
         <?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
+        <?php if (0&& !empty($tabs)): ?>
+          <?php print render($tabs); ?>
+        <?php endif; ?>
         <?php if (!empty($page['help'])): ?>
           <?php print render($page['help']); ?>
         <?php endif; ?>
@@ -220,9 +155,6 @@ dpm($html);
           <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>
         <?php print render($page['content']); ?>
-        <?php if (!empty($tabs)): ?>
-          <?php print render($tabs); ?>
-        <?php endif; ?>
       </section>
 
       <?php if (!empty($page['sidebar_second'])): ?>
@@ -238,3 +170,23 @@ dpm($html);
 <footer class="footer container">
   <?php print render($page['footer']); ?>
 </footer>
+<!-- begin olark code -->
+<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+f[z]=function(){
+(a.s=a.s||[]).push(arguments)};var a=f[z]._={
+},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+0:+new Date};a.P=function(u){
+a.p[u]=new Date-a.p[0]};function s(){
+a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+b.contentWindow[g].open()}catch(w){
+c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+/* custom configuration goes here (www.olark.com/documentation) */
+olark.identify('8506-544-10-4211');/*]]>*/</script><noscript><a href="https://www.olark.com/site/8506-544-10-4211/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
+<!-- end olark code -->

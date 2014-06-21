@@ -74,7 +74,7 @@ function liangyou_audio_list(){
       //  // 新约神学
       //  ),
     );
-	return $radios_list;
+  return $radios_list;
 }
 
 function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
@@ -127,7 +127,7 @@ function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
        }
 
       // bv-1;
-      // || in_array(substr($keyword, 0,2), array_keys($radios_list)) 
+      // || ) 
       if(in_array($keyword, array_keys($radios_list))) {
         $offset = 0;
         // if(strlen($keyword)>2){
@@ -157,4 +157,70 @@ function liangyou_audio_respond($wechatObj,$keyword,$radios_list)
         $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
         exit;
       }
+
+
+      $temp_key = substr($keyword, 0,2);
+      if(in_array($temp_key, array_keys($radios_list))) {
+        $offset = 0;
+        if(strlen($keyword)>2) {
+          $offset = substr($keyword, 2,1);
+          if(!is_numeric($offset)) $offset = 0;
+          $keyword = substr($keyword, 0,2);
+        }
+        $url = ly_get_download_url($keyword,$offset);
+        
+        $title = $radios_list[$keyword]['name'];//'英语世界';
+        $title = "【".$keyword."】".$title;
+        // $string = date('ymd',time()-$offset*24*60*60);
+        $musicurl = $url;
+        $desc = "公众号:永不止息 历史节目-".$offset;
+        $hgmusicurl = $musicurl;
+        $wechatObj->music($title, $desc, $musicurl, $hgmusicurl)->reply();
+        exit;
+
+      }
 }
+
+function ly_get_download_urls($key = '',$offday = '0'){
+  $radios_list = liangyou_audio_list();
+  // dpm($radios_list);
+  // $key ='ws';
+  $live_radios = array();
+  foreach ($radios_list as $keyword=>$value) {
+    if($key!='') {
+      if($key!=$keyword) continue;
+    }     
+    $url = $radios_list[$keyword]['url'];
+    // dpm($url);
+    $html = file_get_html($url);
+    $pattern = '/download_mp3:"http:\/\/stream.liangyou.net\/get_download\/\w+-\w+/';
+    preg_match_all ($pattern, $html, $matches);
+    // dpm($matches[0]);
+
+    foreach($matches[0] as $value){
+      $audio_urls[] = str_replace('download_mp3:"', '', $value);
+    }
+    // dpm($audio_urls);
+    $count = -1;
+    foreach ($audio_urls as $url) {
+      $count++;
+      // $live_radios[] = get_location($url);
+      $live_radios[$keyword][] = drupal_http_request("http://yongbuzhixi.duapp.com/get_location.php?url=$url")->data;//http://115.29.41.155/wp-login/wp_login/get_location.php?url=
+      if($offday == $count) {
+        break;
+      }
+    }
+    // break;
+  }
+  // dpm($live_radios);
+  return $live_radios;
+}
+
+function ly_get_download_url($key = 'ws',$offday = '0'){
+  $donws =  ly_get_download_urls($key,$offday);
+  // dpm($donws[$key][$offday]);
+  return $donws[$key][$offday];
+}
+
+// get_download_url('ws',0);
+// $uri = get_download_url('ws',1);

@@ -1,4 +1,12 @@
-
+.form-item .form-required {
+	color: red;
+}
+#edit-field-sex-und .form-type-radio{
+	float: left;
+}
+#edit-field-sex-und{
+	clear: both;
+}
 /***new***/
 @media all{
 	body {
@@ -10,10 +18,10 @@
 		font-size: 15px;
 	}
 	#head_wrapper,#main-wrapper {
-		background: url('http://statics.xiaoenai.com/v30/images/banner.jpg') top center no-repeat;	
+		background: url('../img/banner.jpg') top center no-repeat;	
 	}
 	#navbar{
-		background: url('http://statics.xiaoenai.com/v30/images/zh/bk.png');	
+		background: url('../img/bk.png');	
 	}
 	.breadcrumb {
 		background-color: #f0f0f0;
@@ -246,9 +254,6 @@ h1, .h1 {
 
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px) {
-
-
-
 	.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 		color: #e80677; 
 		/*font-weight: bolder;*/
@@ -335,7 +340,7 @@ h1, .h1 {
 		color: #fff;
 	}
 	body {
-		background: url('http://statics.xiaoenai.com/v30/images/banner.jpg') top center no-repeat;	
+		background: url('../img/banner.jpg') top center no-repeat;	
 	}
 	
 }
