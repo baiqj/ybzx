@@ -166,7 +166,21 @@
     </div>
   </div>
 </div>
-
+<?php if (!empty($page['footer_1'])): ?>
+  <footer class="footer container" id="footer_1">
+    <?php print render($page['footer_1']); ?>
+  </footer>
+<?php endif; ?>
+<?php if (!empty($page['footer_2'])): ?>
+  <footer class="footer container" id="footer_2">
+    <?php print render($page['footer_2']); ?>
+  </footer>
+<?php endif; ?>
+<?php if (!empty($page['footer_3'])): ?>
+  <footer class="footer container" id="footer_3">
+    <?php print render($page['footer_3']); ?>
+  </footer>
+<?php endif; ?>
 <footer class="footer container">
   <?php print render($page['footer']); ?>
 </footer>

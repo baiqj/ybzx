@@ -19,6 +19,27 @@ function ybzx_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => 'node/2',
   );
+  $blocks['love_group_index_bottom'] = array(
+    'info' => 'love_group_index_bottom',
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'node/2',
+  );
+  $blocks['love_group_index_bottom_rule'] = array(
+    'info' => 'love_group_index_bottom_rule',
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'node/2',
+  );
+  $blocks['love_group_index_bottom_who'] = array(
+    'info' => 'love_group_index_bottom_who',
+    'cache' => DRUPAL_NO_CACHE, //to be confirmed
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'node/2',
+  );
   $blocks['video_endian_comments'] = array(
     'info' => t('video_endian_comments'),
     'cache' => DRUPAL_NO_CACHE, //to be confirmed
@@ -36,21 +57,44 @@ function ybzx_block_view($delta = '') {
 	module_load_include('inc', 'love_layout', 'love_layout.block');
   $block = array();
   switch ($delta) {
+    case 'love_group_index_bottom':
+      $block['subject'] = NULL;
+      $block['content'] = ' <h2>永不止息de异象是:</h2>
+        <h3>爱是互相激励、共同成长，并且需要公众见证、公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀。</h3>';
+      break;
+    case 'love_group_index_bottom_rule':
+      $block['subject'] = NULL;
+      $block['content'] = ' <h2>永不止息de规则是:</h2>
+        <h3>只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</h3>';
+      break;
+    case 'love_group_index_bottom_who':
+      $block['subject'] = NULL;
+      $block['content'] = ' <h2>永不止息源于:</h2>
+        <h3>@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。</h3>';
+      break;
     case 'love_group_index':
+      global $user;
+      if(!$user->uid){
+        $button = '<button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-user"></span> '.l('注册申请','qa/register').'
+  </button>';
+      }else{
+         $button = '<button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-edit"></span> '.l('完善资料','user/register').'
+  </button>';
+      }
+
+      if(og_is_member('node', 2)){
+        $button = '
+  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
+    <span class="glyphicon glyphicon-ok"></span> '.l('审核通过','photos').'
+  </button>';
+      }
       $block['subject'] = NULL;
       $block['content'] = '<div class="intro-left pull-left">
   <h2>幸福家庭</h2>
   <h3>从婚恋迈出第一步</h3>
-  <h3>响应呼召，组建家庭 让爱永不止息！</h3>
-  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
-    <span class="glyphicon glyphicon-user"></span> 注册申请
-  </button>
-  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
-    <span class="glyphicon glyphicon-edit"></span> 完善资料
-  </button>
-  <button type="button" class="btn btn-success btn-lg download-btn" data-toggle="modal" data-target="#click-down">
-    <span class="glyphicon glyphicon-ok"></span> 审核通过
-  </button>
+  <h3>响应呼召，组建家庭 让爱永不止息！</h3>'.$button.'
 </div>';
       break;
   	case 'video_endian':

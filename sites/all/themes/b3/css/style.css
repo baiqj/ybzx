@@ -7,6 +7,24 @@
 #edit-field-sex-und{
 	clear: both;
 }
+#block-ybzx-love-group-index button a{
+	color: #FFF;
+}
+#block-ybzx-love-group-index button a:visited{
+	color: #FFF;
+}
+#love_groupCarousel .carousel-caption h3{
+	font-size: 2vw;
+}
+#love_groupCarousel .carousel-caption p{
+	font-size: 1vw;
+}
+#footer_1,#footer_2,#footer_3 {
+	min-height: 250px;
+}
+#footer_1,#footer_3 {
+	background-color: #FFF;
+}
 /***new***/
 @media all{
 	body {
