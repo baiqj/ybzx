@@ -227,6 +227,25 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           $reply = _mp_node_create($keyword);
           $wechatObj->text($reply)->reply();
       }
+      if ($check_keyword == '祷告' || $check_keyword == '代祷') {
+          // $reply = _mp_node_create($keyword);
+            //201+您想说的话
+              if(strlen($keyword) < 10 ) {
+                $contentStr = $check_keyword."内容不能少于10字！";
+              }else{
+                $mp_service_records = mp_service_get_record($FromUserName);
+                if($mp_service_records['last_cmd'] == $check_keyword) {
+                  $contentStr = "每天只需发布一条信息，请明天再来吧！\n回复【31】听听广播吧！";
+                }else{
+                  mp_service_update_cmd($check_keyword,$FromUserName);
+                  $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
+                  wx_comment('520',$keyword,$wechat_user_info);
+                  $contentStr ="[微笑]".$check_keyword."信息已收到![调皮]\n http://yongbuzhixi.com/node/520 \n如需帮助，请添加小永微信:\n <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n".$notice;
+                }
+              }
+              # code...
+          $wechatObj->text($contentStr)->reply();
+      }
       //http://betternewlife.u.qiniudn.com/newlife-01.mp3
       //default msg
       $contentStr = "【52】广播\n【110】推荐给好友？\n【5010】灵命日粮文字版new\n广播指令为纯数字，请勿带*号。号和中括号\n以后再有什么问题，回复【11+您的祝福与感恩或建议内容】呼唤小永吧！";
