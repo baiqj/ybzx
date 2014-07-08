@@ -27,6 +27,7 @@ function love_block_user_info() {
   // '.l('<em class="icon-setting"></em>完善资料','user/'.$account->uid.'/edit/believes',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
   //'.l('<em class="icon-upload"></em>进入相册','user/'.$account->uid.'',array('html'=>TRUE,'attributes'=>array('class'=>'link-mt','target'=>"_blank"))).'
   $focus_num = user_relationships_load(array('rtid' => array(1),'requester_id' => array($account->uid)),array('count'=>TRUE));
+
   $follow_num = user_relationships_load(array('rtid' => array(1),'requestee_id' => array($account->uid)),array('count'=>TRUE));
   $friends_num = user_relationships_load(array('rtid' => array(2),'approved'=>array(1),'user' => array($account->uid)),array('count'=>TRUE));
   $photo_nodes = love_get_nodes_by_type('photo',$account);
@@ -106,36 +107,36 @@ function love_block_profile_info() {
       $field_character .= ' '.$term->name;
     }
   }
-  if(isset($profile['believes'])){
-    $province = $profile['believes']->field_address[LANGUAGE_NONE][0]['province'];
-    $city = $profile['believes']->field_address[LANGUAGE_NONE][0]['city'];
-    $county = $profile['believes']->field_address[LANGUAGE_NONE][0]['county'];
+  // if(isset($profile['believes'])){
+  //   $province = $profile['believes']->field_address[LANGUAGE_NONE][0]['province'];
+  //   $city = $profile['believes']->field_address[LANGUAGE_NONE][0]['city'];
+  //   $county = $profile['believes']->field_address[LANGUAGE_NONE][0]['county'];
 
-    $province = china_address_get_region_name($province);
-    $city = china_address_get_region_name($city);
-    $county = china_address_get_region_name($county);
-    if($province==$city){
-      $now_local = $province.$county;
-    }else{
-      $now_local = $province.$city;
-    }
-  }
+  //   $province = china_address_get_region_name($province);
+  //   $city = china_address_get_region_name($city);
+  //   $county = china_address_get_region_name($county);
+  //   if($province==$city){
+  //     $now_local = $province.$county;
+  //   }else{
+  //     $now_local = $province.$city;
+  //   }
+  // }
 
-  {//if(isset($profile['main']))
-    $province = $profile['main']->field_address[LANGUAGE_NONE][0]['province'];
-    $city = $profile['main']->field_address[LANGUAGE_NONE][0]['city'];
-    $county = $profile['main']->field_address[LANGUAGE_NONE][0]['county'];
+  // {//if(isset($profile['main']))
+  //   $province = $profile['main']->field_address[LANGUAGE_NONE][0]['province'];
+  //   $city = $profile['main']->field_address[LANGUAGE_NONE][0]['city'];
+  //   $county = $profile['main']->field_address[LANGUAGE_NONE][0]['county'];
 
-    $province = china_address_get_region_name($province);
-    $city = china_address_get_region_name($city);
-    $county = china_address_get_region_name($county);
-    if($province==$city){
-      $home_local = $province.$county;
-    }else{
-      $home_local = $province.$city;
-    }
+  //   $province = china_address_get_region_name($province);
+  //   $city = china_address_get_region_name($city);
+  //   $county = china_address_get_region_name($county);
+  //   if($province==$city){
+  //     $home_local = $province.$county;
+  //   }else{
+  //     $home_local = $province.$city;
+  //   }
 
-  }
+  // }
 
   $all_fields_on_my_website = field_info_fields();
   if(isset($profile['main']->field_degree[LANGUAGE_NONE][0])){
@@ -296,7 +297,7 @@ function love_block_about_us() {
 
 function love_block_weichat_qr() {
   $web = "<div id='love_qr'>扫一扫，与主内佳人互动<br/><img src=".base_path().drupal_get_path('module','love_layout')."/qrcode_for_gh_b945c807e7ec_430.jpg class='img-responsive' /></div>";
-   $mobile = "<div id='love_qr'>点击二维码,快速关注<br/><a href='weixin://contacts/profile/gh_b945c807e7ec'><img src=/".base_path().drupal_get_path('module','love_layout')."/fire.jpg  class='img-responsive' /></a></div>";
+   $mobile = "<div id='love_qr'>点击二维码,快速关注<br/><a href='weixin://contacts/profile/gh_b945c807e7ec'><img src=".base_path().drupal_get_path('module','love_layout')."/fire.jpg  class='img-responsive' /></a></div>";
   drupal_add_js('document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
   (function ($) {$("#love_qr").replaceWith("'.$mobile.'"); }(jQuery));
 });', 'inline');

@@ -167,7 +167,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
       $keyword = str_replace('"', '', $keyword);
       $FromUserName = $wechatObj->getRev()->getRevFrom();
       if(!mp_service_get_record($FromUserName)) {
-        mp_service_add_user($FromUserName,$last_cmd='old_user');
+        mp_service_add_user($FromUserName,$last_cmd='old_user',$service_uid);
       }
       $uid = mp_service_get_uid_by_name($FromUserName);
       // watchdog('$FromUserName-$uid-$keyword', "$FromUserName - $uid - $keyword", array(), WATCHDOG_NOTICE, 'link');
@@ -237,10 +237,10 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
                 if($mp_service_records['last_cmd'] == $check_keyword) {
                   $contentStr = "每天只需发布一条信息，请明天再来吧！\n回复【31】听听广播吧！";
                 }else{
-                  mp_service_update_cmd($check_keyword,$FromUserName);
+                  mp_service_update_cmd($check_keyword,$FromUserName,$service_uid);
                   $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
                   wx_comment('520',$keyword,$wechat_user_info);
-                  $contentStr ="[微笑]".$check_keyword."信息已收到![调皮]\n http://yongbuzhixi.com/node/520 \n如需帮助，请添加小永微信:\n <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n".$notice;
+                  $contentStr ="[微笑]".$check_keyword."信息已收到![调皮]\n->http://t.cn/RvHK735 \n如需帮助，请添加小永微信:\n <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n".$notice;
                 }
               }
               # code...
@@ -303,9 +303,12 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
           return;
         }
       }
+      watchdog('$service_uid1', $service_uid, array(), WATCHDOG_NOTICE, 'link');
       module_load_include('inc', 'mp_service', 'liangyou');
       $radio_list = liangyou_audio_list();
+      watchdog('$service_uid2', $service_uid, array(), WATCHDOG_NOTICE, 'link');
       liangyou_audio_respond($wechatObj,$keyword,$radio_list);
+      watchdog('$service_uid3', $service_uid, array(), WATCHDOG_NOTICE, 'link');
 ////////////////////////////////////////////////////////////////////////
 
       switch ($keyword) {
@@ -327,7 +330,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
         case '88':     
           $contentStr = "指令已取消！\n【1】玩法介绍\n【2】发布相片/心情\n【3】查看活跃用户\n【4】好牧人灵修广播\n【5】良友今日广播";
           if($uid) 
-            mp_service_update_cmd('88',$FromUserName);
+            mp_service_update_cmd('88',$FromUserName,$service_uid);
           break;
         case '1':
           $contentStr ="通过微信玩转永不止息？\n如果您是永不止息会员，\n回复【9】绑定后更多玩法\n回复【00】进入主菜单\n回复【5】进入良友广播\n回复【5010】灵命日粮文字版\n回复【110】推荐帮助-如何推荐给好友？\n回复【365】恩典365";
@@ -811,7 +814,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
                 if($mp_service_records['last_cmd'] == '11') {
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【31】听听广播吧！";
                 }else{
-                  mp_service_update_cmd('11',$FromUserName);
+                  mp_service_update_cmd('11',$FromUserName,$service_uid);
                   $wechat_user_info = mp_service_get_user_info($wechatObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
                   wx_comment('1200',$keyword,$wechat_user_info);
                   $contentStr ="如需帮助，请添加小永微信: <a href='weixin://contacts/profile/yongbuzhixi_love'>649294139</a>\n[微笑]反馈已收到![调皮]\n".$notice;
@@ -828,7 +831,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
                 if($mp_service_records['last_cmd'] == date('ymd')) {
                   $contentStr = "您今天已经参与过了，请明天再来吧！\n回复【31】听听广播吧！";
                 }else{
-                  mp_service_update_cmd(date('ymd'),$FromUserName);
+                  mp_service_update_cmd(date('ymd'),$FromUserName,$service_uid);
                   //add comment on http://www.yongbuzhixi.com/node/486
                 }
               }
@@ -975,7 +978,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
             mp_service_resubscribe($FromUserName);
           }else {
             $contentStr = "[Smile]欢迎关注[Smile]\n<a href='weixin://contacts/profile/love_yongbuzhixi'>免费获取主内精彩图文?\n点此关注主帐号</a>\n回复【31】收听广播\n不要输入【】括号\n部分功能测试开发中～\n敬请期待！\n<a href='weixin://contacts/profile/gh_b945c807e7ec'>-----永不止息-----\n听广播、与主内佳人交通？\n点此关注官方帐号\n-----需要有你-----</a>\n回复【0】了解更多";
-            mp_service_add_user($FromUserName,'subscribe');
+            mp_service_add_user($FromUserName,'subscribe',$service_uid);
           }
           mp_service_text_reply($contentStr);
         }elseif($Event['event'] == 'unsubscribe') {
@@ -992,7 +995,7 @@ function mp_service_response($service_uid = 172, $wx_mp_id = 'gh_b945c807e7ec') 
       watchdog('PicUrl'.$uid, $PicUrl, array(), WATCHDOG_NOTICE, 'link');
       if($uid) {
         $mp_service_records = mp_service_get_record($FromUserName);
-        mp_service_update_cmd('image',$FromUserName);
+        mp_service_update_cmd('image',$FromUserName,$service_uid);
           watchdog('1', 'message', array(), WATCHDOG_NOTICE, 'link');
         if($mp_service_records['last_cmd'] == '20' && (REQUEST_TIME - $mp_service_records['last_cmd_timestamp'] > 900)) {
           $contentStr = "指令已超时！\n请回复【2】查看帮助！";
@@ -1106,7 +1109,7 @@ function mp_service_get_user_info($wechatObj,$account='1',$password='2',$mp_uid=
 function mp_service_update_user_info($wechatObj,$account='1',$password='2',$mp_uid='1') {
   $FromUserName = $wechatObj->getRev()->getRevFrom();
   $res = mp_service_get_record($FromUserName);
-  if($res['last_cmd'] == 'update_contact_info') return;
+  if($res['last_cmd'] == 'update_contact_info') return $res;
 
   module_load_include('inc', 'mp_service', 'config');  
   $options = array(
@@ -1126,7 +1129,7 @@ function mp_service_update_user_info($wechatObj,$account='1',$password='2',$mp_u
       if($Msg['content'] == $wechatObj->getRevContent()) {
         $fakeId = $Msg['fakeid'];
         $data = $wechat->getInfo($fakeId);
-        if(isset($data['contact_info']['user_name'])) {
+        if(isset($data['contact_info']['nick_name'])) {
           try {
             db_update('mp_service')
               ->fields(array(
@@ -1155,14 +1158,13 @@ function mp_service_update_user_info($wechatObj,$account='1',$password='2',$mp_u
   return $data; 
 }
 
-function mp_service_update($FromUserName,$filed,$value) {
-        db_update('mp_service')
-          ->fields(array(
-            $filed => $value,
-            'last_cmd_timestamp' => REQUEST_TIME,
-          ))
-          ->condition('fromusername', $FromUserName)
-          ->execute();     
+function mp_service_update($FromUserName,$service_uid,$fields) {
+  $fields['last_cmd_timestamp'] =  REQUEST_TIME;
+  db_update('mp_service')
+    ->fields($fields)
+    ->condition('fromusername', $FromUserName)
+    ->condition('mp_uid', $service_uid)
+    ->execute();     
 }
 
 function mp_service_is_bind($uid) {
@@ -1221,11 +1223,12 @@ function mp_service_bind_uid($FromUserName,$bindUid) {
     ->execute();
 }
 // and a wechat user!
-function mp_service_add_user($FromUserName,$last_cmd='subscribe') {
+function mp_service_add_user($FromUserName,$last_cmd='subscribe',$service_uid=0) {
   db_insert('mp_service')
     ->fields(array(
       'fromusername' => $FromUserName,
       'last_cmd' => $last_cmd,
+      'mp_uid' => $service_uid,
       'unsubscribe' => 0,
       'last_cmd_timestamp' => REQUEST_TIME,
       'created' => REQUEST_TIME,
@@ -1311,13 +1314,14 @@ function mp_service_imageReplyText($contentStr) {
   }
 }
 
-function mp_service_update_cmd($last_cmd,$FromUserName) {
+function mp_service_update_cmd($last_cmd,$FromUserName,$service_uid) {
   db_update('mp_service')
     ->fields(array(
       'last_cmd' => $last_cmd,
       'last_cmd_timestamp' => REQUEST_TIME,
     ))
     ->condition('fromusername', $FromUserName)
+    ->condition('mp_uid', $service_uid)
     ->execute();
 }
 function wx_comment($nid,$keyword,$wechat_user_info=array()) {//,

@@ -28,9 +28,9 @@ function wechat_main_page(){
     }
   }
   if(!is_array($weObj->Message(''))){
-    $weObj->text(variable_get("wechat_default_message", "Hi, WeChat!"));
+    // $weObj->text(variable_get("wechat_default_message", "Hi, WeChat!"));
   }
-  $weObj->reply();
+  // $weObj->reply();
   exit;
 }
 

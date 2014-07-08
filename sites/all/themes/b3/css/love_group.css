@@ -17,31 +17,49 @@
 	font-weight: normal;
 }
 
-.page-node-2 .main-container #block-system-main,
+.page-node-2  #block-system-main,
 .page-node-2 .region-sidebar-first {
 	background-color: transparent;
 }
-
 .page-node-2 #block-system-main {
-	border: 1px solid #e3e3e3;
+	border: 3px solid #fff;
 	padding: 0;
-	border: none;
 }
-#love_groupCarousel .carousel-caption {
-	top: -26px;
+#carousel .carousel-caption {
+	top: -20px;
+  bottom: auto;
 	right: 0;
 	left: 0;
 	color: #666;
+	text-shadow:none;
+}
+
+/**only small**/
+@media (max-width: 768px) {
+	#carousel .carousel-caption h3 {
+		font-size: 1vw;
+		color: #fff;
+	}
+	#carousel .carousel-caption{
+		display: none;
+	}
+	#carousel .first .carousel-caption{
+		display: block;
+	}
 }
 #love_groupCarousel .carousel-indicators {
 	top: 50px;
 	color: red;
 }
 .carousel-indicators li{
-	border: 1px solid #F73F9B;
+	border: 1px solid #fff;
 	background-color: transparent;	
 }
 
 .carousel-indicators .active {
-	background-color: #F73F9B;
+	background-color: #fff;
+}
+
+p.index_bottom{
+	text-indent: 2em;
 }

@@ -1,14 +1,13 @@
+.logged-in .main-container #block-system-main{
+  background: none;
+  padding: 15px 0 30px 0;
+}
 
-  .bbb-goback {
-    float: left;
-    position: fixed;
-  }
- 
   .bbb-page-user{ 
     font-size: 16px;
     color:#FFF;
     text-align: center;
-    background: #79b9d9;
+    /*background: #79b9d9;*/
   }
   .status a {
     background-color: rgba(255, 255, 255, 0.1);

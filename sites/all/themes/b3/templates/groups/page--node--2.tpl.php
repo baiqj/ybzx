@@ -87,6 +87,15 @@
         <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
         <?php endif; ?>
 
+        
+        <div class="mobile-menu">
+          <?php if(!user_is_logged_in()){
+            echo l('登录','user/login'); 
+          }else{
+            global $user;
+            echo '欢迎您，'.l($user->name,'user/'.$user->uid); 
+          }?>
+        </div>
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>

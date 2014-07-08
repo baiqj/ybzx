@@ -13,6 +13,7 @@ function b3_preprocess_page(&$vars, $hook) {
   $detect = mobile_detect_get_object();  
   if($detect->isMobile()) {
     drupal_add_js(drupal_get_path('theme', 'b3').'/js/WeixinJSBridge.js');
+    drupal_add_js(drupal_get_path('theme', 'b3').'/js/appmsg1ea1b6.js');
   }
 }
 /**

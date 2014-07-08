@@ -59,18 +59,26 @@ function ybzx_block_view($delta = '') {
   switch ($delta) {
     case 'love_group_index_bottom':
       $block['subject'] = NULL;
-      $block['content'] = ' <h2>永不止息de异象是:</h2>
-        <h3>爱是互相激励、共同成长，并且需要公众见证、公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀。</h3>';
+      $block['content'] = ' <h3>永不止息の规则:</h3>
+        <p class="index_bottom">只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</p> ';
       break;
     case 'love_group_index_bottom_rule':
       $block['subject'] = NULL;
-      $block['content'] = ' <h2>永不止息de规则是:</h2>
-        <h3>只接受熟人间邮箱邀请注册，请为您邀请的肢体祷告，您在熟人之间互相介绍时，应慎重，严谨，并为之代祷。</h3>';
+      $block['content'] = '
+        <h3>源于2013.11.11:</h3>
+        <p class="index_bottom">@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。</p>';
       break;
     case 'love_group_index_bottom_who':
       $block['subject'] = NULL;
-      $block['content'] = ' <h2>永不止息源于:</h2>
-        <h3>@bluesky_still透过对当前教会单身肢体需求的看见，业余时间开发的针对主内肢体婚恋社交网站，通过简洁的关系建立渠道，熟人的推荐，舆论监督与指导，为肢体提供一个便捷互相了解、信实互动的社交平台。</h3>';
+      $block['content'] = '<div class="bottom-copyright">
+          <ul>
+            <li>'.l('关于我们','about').'</li> ┊ 
+            <li>'.l('联系我们','about').'</li> ┊ 
+            <li>'.l('常见问题','questions').'</li> ┊ 
+            <li>'.l('意见反馈','node/485').'</li>
+          </ul>
+          <p>Copyright © 2013 - 2014 永不止息 版权所有 </p>
+        </div>';
       break;
     case 'love_group_index':
       global $user;
@@ -95,7 +103,10 @@ function ybzx_block_view($delta = '') {
   <h2>幸福家庭</h2>
   <h3>从婚恋迈出第一步</h3>
   <h3>响应呼召，组建家庭 让爱永不止息！</h3>'.$button.'
-</div>';
+
+  <div class="version"> <h3>永不止息の异象:</h3>
+  <p>爱是互相激励、共同成长，并且需要公众见证、公开交往，接受监督的，让更多的肢体在婚恋交友，及组建家庭上彰显神的荣耀。</p></div>
+</div> ';
       break;
   	case 'video_endian':
   		$html = file_get_html('http://v.tudou.com/_114352882/');

@@ -187,17 +187,7 @@ function love_exit() {
 	}
 }
 
-/**
- * Implement hook_ctools_plugin_api().
- *
- * This hook is needed to let ctools know about exportables.
- * @see heartbeat_og_ctools_plugin_api
- */
-function love_ctools_plugin_api($module, $api) {
-  if ($module == 'heartbeat' && $api == 'heartbeat') {
-    return array('version' => 1);
-  }
-}
+
 /**
  * bug fix
  * @see http://drupal.org/node/1286876#comment-5294866

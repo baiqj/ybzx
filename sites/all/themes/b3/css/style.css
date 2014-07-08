@@ -19,14 +19,35 @@
 #love_groupCarousel .carousel-caption p{
 	font-size: 1vw;
 }
-#footer_1,#footer_2,#footer_3 {
-	min-height: 250px;
-}
-#footer_1,#footer_3 {
-	background-color: #FFF;
-}
 /***new***/
 @media all{
+	.bottom-copyright{
+		text-align: center;
+		padding: 30px 0px;
+	}
+	.bottom-copyright li{
+		list-style-type: none;
+		display: inline;
+	}	
+	.bottom-copyright ul{
+		padding-left: 0;
+	}
+	.bottom-copyright p{
+		font-size: 12px;
+	}
+	.bottom-copyright li a{
+		color: #666;
+	}
+
+#footer_1,#footer_2,#footer_3 {
+	padding: 30px 0;
+}
+#footer_2 {
+	background-color: #FFF;
+}
+.version {
+	padding-top: 30px;
+}
 	body {
 		background: url("../img/page-bg-tile.jpg") center;
 		-webkit-background-size: 50px 50px;
@@ -63,14 +84,44 @@
 }
 /**only big**/
 @media (min-width: 768px) {
+	
+	.version p{
+		text-shadow:none;
+		color:#FFF;
+		letter-spacing: 4px;
+	}
 	#navbar .secondary{
 		float: right;
 	}
+	.mobile-menu{
+		display: none;
+	}
 }
-
+/**only small**/
 @media (max-width: 768px) {
 
+	.mobile-menu a:active,
+	.mobile-menu a:hover{
+		font-weight: bolder;
+		color: #FFF;
+	}
+	.mobile-menu {
+		float:left;
+		padding:14px;
+	}
+	.mobile-menu a{
+		color: #FFF;		
+	}
+	#admin-menu{
+		display: none;
+	}
+	ul.menu.secondary{
+		display: none;
+	}
+
 }
+
+
 h1, .h1 {
 	font-size: 20px;
 }
@@ -167,7 +218,7 @@ h1, .h1 {
 		-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		padding: 15px 20px 20px 30px;
+		padding: 15px 20px 30px 20px;
 	}
 	/*top nav all expand 100%*/
 	#navbar{

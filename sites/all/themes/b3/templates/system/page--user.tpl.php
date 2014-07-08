@@ -75,73 +75,33 @@
 $account = user_load(arg(1));
 global $user;
 // dpm($user);
-$url = 'http://weixin.sogou.com/gzhjs?cb=sogou.weixin.gzhcb&openid=oIWsFt1gF4leXGYvUZd37TlFG4Ac';
-// $context = stream_context_create(array('http' => array('header' => 'User-Agent: Mozilla compatible')));
-$html = file_get_html($url);
-$html = trim($html->plaintext);
-$html = str_replace('sogou.weixin.gzhcb(', '', $html);
-$html = str_replace(')', '', $html);
-// 解决xml_parse(): input conversion failed due to input error
-// 错误原因：xml中存在无法转换的字符；
-// 解决：
-// 步骤1、通过mb_detect_encoding函数，获取xml的编码；
-// 步骤2、通过mb_convert_encoding函数转成指定的编码，或使用iconv，但编码参数需加上//IGNORE；
-// 步骤3：通过正则将<?xml …. encoding=”gb2312″ ..? >中的gb2312替换为指定编码；
-$html = str_replace('gbk', 'UTF-8', $html);
+// $url = 'http://weixin.sogou.com/gzhjs?cb=sogou.weixin.gzhcb&openid=oIWsFt1gF4leXGYvUZd37TlFG4Ac';
+// // $context = stream_context_create(array('http' => array('header' => 'User-Agent: Mozilla compatible')));
+// $html = file_get_html($url);
+// $html = trim($html->plaintext);
+// $html = str_replace('sogou.weixin.gzhcb(', '', $html);
+// $html = str_replace(')', '', $html);
+// // 解决xml_parse(): input conversion failed due to input error
+// // 错误原因：xml中存在无法转换的字符；
+// // 解决：
+// // 步骤1、通过mb_detect_encoding函数，获取xml的编码；
+// // 步骤2、通过mb_convert_encoding函数转成指定的编码，或使用iconv，但编码参数需加上//IGNORE；
+// // 步骤3：通过正则将<?xml …. encoding=”gb2312″ ..? >中的gb2312替换为指定编码；
+// $html = str_replace('gbk', 'UTF-8', $html);
 
-preg_match_all("/{(.*)}/s",$html,$match);
-$html = json_decode($match[0][0]);
+// preg_match_all("/{(.*)}/s",$html,$match);
+// $html = json_decode($match[0][0]);
 // $xmlstring = $html->items[0];
 // dpm(mb_detect_encoding($xmlstring));
 // $xmlstring = mb_convert_encoding($xmlstring, "UTF-8");
 // $xml = simplexml_load_string($xmlstring);
 // $json = json_encode($xml);
 // $array = json_decode($json,TRUE);
-dpm($html);
+// dpm($html);
 
 ?>
-<?php if($user->uid ==6 &&$logged_in):?>
 
-<div class="bbb-page-user clearfix">
-  <div class="header">
-    <div class="bbb-goback"><?php echo l('« 首页','')?></div>
-    <div class="username">@<?php echo $account->name?$account->name:'匿名^_^';?></div>
-  </div>
-  
-  <div class="bbb-user">
-    <div class="picture">
-      <a href="#" class="">
-        <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="https://avatars2.githubusercontent.com/u/1160703?s=460" style="width: 140px; height: 140px;">
-      </a>
-    </div>
-    <div class="username"> <h3><span>郭向科</span> <span>男</span> <span>27岁</span> <span>交往中...</span></h3></div>
-    <div class="usersignatures">
-      <p>天空依然蔚蓝，虽然有时你看不见  这家伙很懒， 这家伙很懒， 这家伙很懒， 这家伙很懒</p>
-    </div>
-    <div class="ops"><a href="#" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus"></span>关 注</a> </div>
-    <div class="status clearfix">
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表可信度">
-        <span class="item"><div class="count">3</div><div class="s-name">熟人</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表努力度">
-        <span class="item"><div class="count">32</div><div class="s-name">关注</div></span>
-      </a>
-      <a href="#" class="tooltip-count active" data-toggle="tooltip" data-placement="bottom" title="代表真诚度">
-        <span class="item"><div class="count">12</div><div class="s-name">照片</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表活跃度">
-        <span class="item"><div class="count">52</div><div class="s-name">心语</div></span>
-      </a>
-      <a href="#" class="tooltip-count" data-toggle="tooltip" data-placement="top" title="代表受欢迎度">
-        <span class="item"><div class="count">33</div><div class="s-name">粉丝</div></span>
-      </a>
-      
-    </div>
-    <div class="demo" style="height:300px;"></div>
-  </div>
-</div>
-<?php endif;?>
-<div id="head_wrapper" style="display:none;">
+<div id="head_wrapper" style="display:block;">
   <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
     <div class="container-nav">
       <div class="navbar-header">
@@ -150,10 +110,18 @@ dpm($html);
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
         <?php endif; ?>
-
         <?php if (!empty($site_name)): ?>
         <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
         <?php endif; ?>
+
+        <div class="mobile-menu">
+          <?php if(!user_is_logged_in()){
+            echo l('登录','user/login'); 
+          }else{
+            global $user;
+            echo l($user->name,'user/'.$user->uid); 
+          }?>
+        </div>
 
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
