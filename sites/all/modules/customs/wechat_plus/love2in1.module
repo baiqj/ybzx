@@ -22,15 +22,23 @@ function love2in1_wechat_message($weObj){
           $wechat_user_info = mp_service_update_user_info($weObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid );
 
           // watchdog('wechat_user_info', '<pre>'.print_r($wechat_user_info,true), array(), WATCHDOG_NOTICE, 'link');
-          if($keyword == 'qx') {
+          $check_keyword = truncate_utf8($keyword, 2, $wordsafe = FALSE, $add_ellipsis = FALSE, $min_wordsafe_length = 1);
+          if ($check_keyword == '建议' || $check_keyword == '意见') {
+            mp_service_update_cmd($check_keyword,$FromUserName,$service_uid);
+            $wechat_user_info = mp_service_get_user_info($weObj,$mp_services_config['account'],$mp_services_config['password'],$service_uid);
+            wx_comment('1243',$keyword,$wechat_user_info);
+            $contentStr ="[微笑]".$check_keyword."信息已收到![调皮]谢谢反馈！";
+            $weObj->text($contentStr)->reply();
+          }
+          if($keyword == 'qx' || $keyword == '否') {
               mp_service_update_cmd('qx',$FromUserName,$service_uid);
-              $weObj->text("指令已取消！")->reply();
+              $weObj->text("指令已取消！\n回复建议+内容，提出意见！")->reply();
           }
           //begin
           if (filter_var($keyword, FILTER_VALIDATE_EMAIL)) {
               // e-mail address
               mp_service_update_cmd('email:'.$keyword,$FromUserName,$service_uid);
-              $weObj->text("请回复密码绑定！")->reply();
+              $weObj->text("请回复密码绑定！\n回复建议+内容，提出意见！")->reply();
           }
           if(!$mp_member['uid']){//绑定...
             if(!(strpos($mp_member['last_cmd'], 'email') === false)){//was found
@@ -41,11 +49,11 @@ function love2in1_wechat_message($weObj){
               $bind = love2in1_bind($FromUserName,$email,$password,$service_uid);
               if($bind){
                 //sucess
-                $weObj->text("欢迎您，绑定成功！")->reply();
+                $weObj->text("欢迎您，绑定成功！\n回复建议+内容，提出意见！")->reply();
                 //
               }else{
                 //error password or email!!!
-                $weObj->text("密码或邮箱不对！\n请重新输入！")->reply();
+                $weObj->text("密码或邮箱不对！\n请重新输入！\n回复建议+内容，提出意见！")->reply();
               }
             }
           }else{
@@ -53,11 +61,20 @@ function love2in1_wechat_message($weObj){
             if(!(strpos($mp_member['last_cmd'], 'readmsg') === false)){
                 $readmsg = strstr($mp_member['last_cmd'], ':');
                 $msg_id =  str_replace(':', '', $readmsg);
+                $new_message = $keyword;
+                mp_service_update_cmd('msg_reply:'.$msg_id.':'.$keyword,$FromUserName,$service_uid);
+                $weObj->text("您正在尝试回复该私信\n回复是发送私信\n回复否取消发送\n回复建议+内容，提出意见！")->reply();
+            }
+            if(!(strpos($mp_member['last_cmd'], 'msg_reply') === false) && $keyword == '是'){
+                
+                $last_cmd = explode(':', $mp_member['last_cmd']);
+                $msg_id =  $last_cmd[1];
+                $msg =  $last_cmd[2];
                 // $new_message = $keyword;
                  $old_message = love2in1_get_message_by_id($msg_id);
                  $fields = array(
                     'title' =>'Re:'.$old_message['title'],
-                    'content' =>$keyword,
+                    'content' =>$msg,
                     'sendfrom' =>$old_message['sendto'],
                     'sendto' =>$old_message['sendfrom'],
                     'status' =>'send',
@@ -65,10 +82,10 @@ function love2in1_wechat_message($weObj){
                     );
                 $new_msg_id = love2in1_new_message($fields);
                 if($new_msg_id){
-                  $weObj->text("已成功发送给->".$old_message['sendfrom'])->reply();
+                  $weObj->text("已成功发送给->".$old_message['sendfrom']."\n回复建议+内容，提出意见！")->reply();
                   mp_service_update_cmd('qx',$FromUserName,$service_uid);
                 }else{
-                   $weObj->text("发送失败！")->reply();
+                   $weObj->text("发送失败！\n回复建议+内容，提出意见！")->reply();
                 }
             }
 
@@ -79,7 +96,7 @@ function love2in1_wechat_message($weObj){
               $msg_id = $keyword;
               $msg = love2in1_get_message_by_id($msg_id);
               if ($msg['sendto'] != $mp_member['nickname']) {
-                 $weObj->text("笑而不语^_^")->reply();
+                 $weObj->text("笑而不语^_^\n回复建议+内容，提出意见！")->reply();
               }
               mp_service_update_cmd('readmsg:'.$msg_id,$FromUserName,$service_uid);
               $img = array(
