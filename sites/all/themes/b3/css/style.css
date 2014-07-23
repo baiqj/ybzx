@@ -49,15 +49,14 @@
 	padding-top: 30px;
 }
 	body {
-		background: url("../img/page-bg-tile.jpg") center;
-		-webkit-background-size: 50px 50px;
-		-moz-background-size: 50px 50px;
-		-o-background-size: 50px 50px;
-		background-size: 50px 50px;
+		background: url('../img/banner.jpg') no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
 		font-size: 15px;
 	}
 	#head_wrapper,#main-wrapper {
-		background: url('../img/banner.jpg') top center no-repeat;	
 	}
 	#navbar{
 		background: url('../img/bk.png');	

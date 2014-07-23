@@ -165,7 +165,54 @@ if(isset( $photo_nodes['node']))
       </a>
       
     </div>
-    <div class="demo" style="height:300px;"></div>
+
+  <style type="text/css">
+    div.gallery-row:after { clear: both; content: "."; display: block; height: 0; visibility: hidden; }
+    div.gallery-item { float: left; width: 33.33333333%; }
+    div.gallery-item a { display: block; margin: 5px; border: 1px solid #3c3c3c; }
+    div.gallery-item img { display: block; width: 100%; height: auto; }
+
+
+    .view-user-photos 
+  </style>
+  
+  <link href="<?php echo drupal_get_path('theme', 'b3');?>/photoswipe/1.0.11/photoswipe.css" type="text/css" rel="stylesheet" />
+  
+  <script type="text/javascript" src="<?php echo drupal_get_path('theme', 'b3');?>/photoswipe/1.0.11/lib/simple-inheritance.min.js"></script>
+  <script type="text/javascript" src="<?php echo drupal_get_path('theme', 'b3');?>/photoswipe/1.0.11/code-photoswipe-1.0.11.min.js"></script>
+  
+  
+  <script type="text/javascript">
+    
+    // Set up PhotoSwipe with all anchor tags in the Gallery container 
+    document.addEventListener('DOMContentLoaded', function(){
+      
+      Code.photoSwipe('a', '#Gallery');
+      
+    }, false);
+  </script>
+    <div id="Gallery">
+      <div class="gallery-row">
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/001.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/001.jpg" alt="Image 01" /></a></div>
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/002.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/002.jpg" alt="Image 02" /></a></div>
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/003.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/003.jpg" alt="Image 03" /></a></div>
+      </div>
+      <div class="gallery-row">
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/004.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/004.jpg" alt="Image 04" /></a></div>
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/005.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/005.jpg" alt="Image 05" /></a></div>
+        <div class="gallery-item"><a href="http://photoswipe.com/latest/examples/images/full/006.jpg"><img src="http://photoswipe.com/latest/examples/images/thumb/006.jpg" alt="Image 06" /></a></div>
+      </div>
+    </div>
+
+    <div class="demo" >
+
+
+
+      <?php 
+        echo views_embed_view('user_photos', 'visit');
+      ?>
+
+    </div>
   </div>
 </div>
 <?php endif;?>
