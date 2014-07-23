@@ -106,6 +106,8 @@ function love_preprocess_views_view(&$vars) {
   if ($view->name == 'index') {//  && $view->current_display == 'photos_page_all'
     //$vars['answer_node_form'] = druedu_node_add('answer');
     drupal_add_css(drupal_get_path('module', 'love') .'/highslide/highslide.css');
+    drupal_add_css(drupal_get_path('module', 'love') .'/css/views-index-ch.css');
+    
     drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide.js');
     drupal_add_js(drupal_get_path('module', 'love') .'/highslide/highslide-cfg.js');
     drupal_add_js(drupal_get_path('module', 'love') .'/js/highslide-cfg.js');
@@ -138,7 +140,7 @@ function love_user_login(&$edit, $account)
     && !is_null($redirection)
     && (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset'))
   {
-    $_GET['destination'] = $redirection; // Should we use $edit['redirect'] instead..?
+    // $_GET['destination'] = $redirection; // Should we use $edit['redirect'] instead..?
   }
 }
 
