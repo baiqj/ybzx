@@ -133,14 +133,14 @@ function love_user_presave(&$edit, $account, $category) {
 function love_user_login(&$edit, $account)
 {
   // Your logic will set $redirection to the desired location
-  $redirection = 'photos';
+  $redirection = '<front>';
 
   // Unless there is already a redirection going, or the user is trying to reset his password, we redirect to $redirection.
   if (empty($_GET['destination'])
     && !is_null($redirection)
     && (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset'))
   {
-    // $_GET['destination'] = $redirection; // Should we use $edit['redirect'] instead..?
+    $_GET['destination'] = $redirection; // Should we use $edit['redirect'] instead..?
   }
 }
 
