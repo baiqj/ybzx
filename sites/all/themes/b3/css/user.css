@@ -1,17 +1,3 @@
-.logged-in .main-container #block-system-main{
-  background: none;
-  padding: 15px 0 30px 0;
-}
-.node-type-wx-receive-messages .main-container #block-system-main,
- {
- background-color: #fff;
- padding: 15px 20px 30px 20px;
-}
-.col-sm-9 .region-content{
-  font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-  /*background: url(../images/logo_bg.jpg) repeat; /dashboard_bg.png*/
-  background: url(../img/graphy.png) repeat  center top ;
-}
 .logged-in .main-container #block-system-main {
   
   background-image: url("../img/noise.png");
@@ -26,7 +12,19 @@
   -moz-border-radius: 5px;      /* Gecko browsers */
   -webkit-border-radius: 5px;   /* Webkit browsers */
   border-radius:6px;            /* W3C syntax */
-  padding-top: 10px;
+  padding: 15px 20px 30px 20px;
+}
+
+.node-type-wx-receive-messages .main-container #block-system-main,
+.page-node .main-container #block-system-main {
+ background-color: #fff;
+ padding: 15px 20px 30px 20px;
+}
+
+.col-sm-9 .region-content{
+  font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+  /*background: url(../images/logo_bg.jpg) repeat; /dashboard_bg.png*/
+  background: url(../img/graphy.png) repeat  center top ;
 }
 
   .bbb-page-user{ 
