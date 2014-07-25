@@ -162,29 +162,28 @@ h1, .h1 {
 
 
 /*global css */
-@media all{
-	.main-container #block-system-main {
-		background-color: #ffffff;
-		border-style: hidden;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-		border-radius: 5px;
-		margin: 0 auto 0;
-		/*width: 672px;*/
-		-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-		padding: 15px 20px 30px 20px;
-	}
-	/*top nav all expand 100%*/
-	#navbar{
-		max-width: 100%;
-	}
-	.node .content .field-name-body {
-		line-height: 2;		
-	}
 
+.main-container #block-system-main {
+	background-color: #ffffff;
+	border-style: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin: 0 auto 0;
+	/*width: 672px;*/
+	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	padding: 15px 20px 30px 20px;
 }
+/*top nav all expand 100%*/
+#navbar{
+	max-width: 100%;
+}
+.node .content .field-name-body {
+	line-height: 2;		
+}
+
 
 #sbq_gototop { 
 	float: left; 
@@ -253,14 +252,14 @@ h1, .h1 {
 		color: #fff;
 		background-color: transparent;
 }
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 	font-weight: bolder;
 }
-	.main-row {
-		padding-top: 0px;
-	}
 
-
+.main-row {
+	padding-top: 0px;
+}
 
 .navbar-header {
 	padding: 0 15px;
