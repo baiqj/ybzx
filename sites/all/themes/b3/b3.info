@@ -32,6 +32,7 @@ stylesheets[all][] = css/style.css
 stylesheets[all][] = css/qa.css
 stylesheets[all][] = css/user.css
 stylesheets[all][] = css/love_group.css
+stylesheets[all][] = css/b3_media_qurey.css
 scripts[] = 'js/script.js'
 
 ; For information on choosing the desired method, please read the Drupal

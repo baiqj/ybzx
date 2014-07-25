@@ -81,14 +81,14 @@
 		$city = $profile['main']->field_address[LANGUAGE_NONE][0]['city'];
 		$county = $profile['main']->field_address[LANGUAGE_NONE][0]['county'];
 	}
-	$province = china_address_get_region_name($province);
-	$city = china_address_get_region_name($city);
-	$county = china_address_get_region_name($county);
-	if($province==$city){
-		$local = $province.$county;
-	}else{
-		$local = $province.$city;
-	}
+	// $province = china_address_get_region_name($province);
+	// $city = china_address_get_region_name($city);
+	// $county = china_address_get_region_name($county);
+	// if($province==$city){
+	// 	$local = $province.$county;
+	// }else{
+	// 	$local = $province.$city;
+	// }
 
 	$vote = $value;
 	$flag = $ops;
