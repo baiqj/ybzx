@@ -79,8 +79,6 @@
 	font-size: 15px;
 	padding: 10px 0;
 	}
-	.navbar-default .navbar-nav>li>a{color:#777}
-	.navbar-default .navbar-nav>li>a:hover{color:#777;font-weight: bolder;}
 	.navbar-nav {
 		margin: 0;
 	}
