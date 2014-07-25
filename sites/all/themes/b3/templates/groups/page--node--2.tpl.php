@@ -93,7 +93,7 @@
             echo l('登录','user/login'); 
           }else{
             global $user;
-            echo '欢迎您，'.l($user->name,'user/'.$user->uid); 
+            echo l($user->name,'user/'.$user->uid); 
           }?>
         </div>
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
