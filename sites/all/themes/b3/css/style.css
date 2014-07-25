@@ -1,5 +1,5 @@
 body {
-	background: url('../img/banner.jpg') no-repeat center center fixed; 
+	background: url('../img/banner.jpg') no-repeat center center ; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -65,7 +65,7 @@ body {
 		font-size: 12px;
 	}
 	.bottom-copyright li a{
-		color: #666;
+		color: #fff;
 	}
 
 #footer_1,#footer_2,#footer_3 {
