@@ -77,7 +77,7 @@ function ybzx_block_view($delta = '') {
             <li>'.l('常见问题','questions').'</li> ┊ 
             <li>'.l('意见反馈','node/485').'</li>
           </ul>
-          <p>Copyright © 2013 - 2014 永不止息 版权所有 </p>
+          <p>Copyright © 2013 - 2014 主爱合 版权所有 </p>
         </div>';
       break;
     case 'love_group_index':
